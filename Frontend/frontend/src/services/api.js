@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://day-six.onrender.com',
+  baseURL: 'https://day-six.onrender.com/api',
+  withCredentials: true
 });
 
 // Auto set token if logged in
