@@ -72,3 +72,28 @@ export const deleteTask = async (req, res) => {
     res.status(500).json({ message: 'Failed to delete task' });
   }
 };
+
+export const updateTaskStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { completed } = req.body;
+
+    console.log('PATCH Body:', req.body); // ✅ Debug log
+
+    const task = await Task.findById(id);
+    if (!task) return res.status(404).json({ message: 'Task not found' });
+
+    // ✅ Proper user ownership check
+    if (task.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: 'Not authorized to update this task' });
+    }
+
+    task.completed = completed;
+    const updated = await task.save();
+
+    res.status(200).json(updated);
+  } catch (err) {
+    console.error('Error updating task status:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};

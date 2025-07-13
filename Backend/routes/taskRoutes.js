@@ -3,20 +3,22 @@ import {
   getTasks,
   createTask,
   updateTask,
-  deleteTask
+  deleteTask,
+  updateTaskStatus 
 } from '../controllers/taskController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
 
-// Protected Routes
+
 router.route('/')
   .get(protect, getTasks)
   .post(protect, createTask);
 
 router.route('/:id')
   .put(protect, updateTask)
+  .patch(protect, updateTaskStatus)
   .delete(protect, deleteTask);
 
 export default router;
