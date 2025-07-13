@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'https://day-six.onrender.com/api',
+  baseURL: 'https://day-six.onrender.com',
   withCredentials: true
 });
 
