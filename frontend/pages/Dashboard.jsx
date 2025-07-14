@@ -21,7 +21,7 @@ const Dashboard = () => {
     } else {
       fetchTasks();
     }
-  }, [user]);
+  }, [user, navigate]);
 
   const fetchTasks = async () => {
     try {
